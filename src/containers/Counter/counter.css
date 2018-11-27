@@ -1,0 +1,7 @@
+.counter {
+    display: flex;
+    flex-wrap: wrap;
+    width: 200px; 
+    margin: auto;
+    margin-top: 30px;
+  }
