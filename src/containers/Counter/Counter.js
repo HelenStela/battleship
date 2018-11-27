@@ -5,6 +5,7 @@ import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
 import Cell from '../../components/Cell/Cell';
 import './counter.css';
+import dataShip from './shiplayout';
 
 const arr = [];
 
@@ -19,7 +20,9 @@ const arr = [];
 class Counter extends Component {
     state = {
         counter: 0,
-        cellColors: Array(100).fill('lightblue')
+        cellColors: Array(100).fill('lightblue'),
+        layout : dataShip,
+        countShip: 5
     }
 
     counterChangedHandler = ( action, value ) => {
@@ -39,15 +42,51 @@ class Counter extends Component {
         }
     }
 
-
-    
+      
     toggleColor = (idx) => {
+        const x = Math.floor(idx/10);
+        const y = idx-x*10;
+        console.log ("x=" + x + " y=" + y);
         this.setState((prevState) => {
-            const newColors = [...prevState.cellColors]
-            newColors[idx] = prevState.cellColors[idx] === 'lightblue' ? 'red' : 'grey'
+            const newColors = [...prevState.cellColors];     
+            const newLayout = [...prevState.layout];
+            let resultSheep = null;
+            let toDestroy = false;
+            prevState.layout.map(ship => {
+                console.log("isDestroyed "+ ship.isDestroyed)
+                if (ship.isDestroyed==='false'){                  
+                    for (let i = 0; i < ship.positions.length; i++){                       
+                        if ((ship.positions[i][0]===x)&&(ship.positions[i][1]===y)&&(ship.positions[i][2] === 0)){                           
+                            ship.positions[i][2] = '1';
+                            console.log("ship.positions["+i+"][2] ="+ship.positions[i][2])
+                            newColors[idx] = 'red';
+                            resultSheep = ship;                          
+                            ship.alive--;
+                            console.log("alive:"+ ship.alive)
+                            if (ship.alive === 0){
+                                toDestroy = true;
+                                resultSheep.isDestroyed = true;
+                            }                         
+                        }     
+                    }
+                }
+            });
+            if ((resultSheep)&&(toDestroy)) {
+                console.log("toDestroy "+resultSheep.ship)
+                resultSheep.positions.map(position => {
+                    const num = position[0]*10+position[1];
+                    newColors[num] = 'black';
+                })                
+            } else if (resultSheep){
+                  newLayout[resultSheep.index] = resultSheep;
+            }
+            else {
+                newColors[idx] = prevState.cellColors[idx]==='lightblue' ? 'grey': (prevState.cellColors[idx]==='black' ? 'black' : 'grey')
+            }
 
             return {
-                cellColors: newColors
+                cellColors: newColors,
+                layout: newLayout
             }
         });
     }
@@ -81,7 +120,9 @@ class Counter extends Component {
 const mapStateToProps = state => {
     return {
         ctr: state.counter,
-        cells: state.cells
+        cells: state.cells,
+        layout: state.layout,
+        countShip: state.countShip
     };
 };
 
