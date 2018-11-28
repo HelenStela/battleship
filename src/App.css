@@ -22,12 +22,10 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.App{
+  background-image: url('15.2.jpg') ;
+  margin-bottom: 5px;
+  height: 880px;
+  background-size: 100% auto; 
+  overflow: hidden;
 }
-

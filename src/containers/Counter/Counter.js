@@ -9,14 +9,6 @@ import dataShip from './shiplayout';
 
 const arr = [];
 
-// for (let i = 0; i < 10; i++) {
-//     const innerArr = [];
-//     for (let j = 0; j < 10; j++) {
-//         innerArr[j] = 'green'
-//     }
-//     arr.push(innerArr);
-// }
-
 class Counter extends Component {
     state = {
         counter: 0,
@@ -50,45 +42,53 @@ class Counter extends Component {
         this.setState((prevState) => {
             const newColors = [...prevState.cellColors];     
             const newLayout = [...prevState.layout];
+            let newCountShip = prevState.countShip;
+            if (newCountShip === 0) {
+                alert("YOU WON!!!!!!!!!!");
+                return;}
             let resultSheep = null;
             let toDestroy = false;
-            prevState.layout.map(ship => {
-                console.log("isDestroyed "+ ship.isDestroyed)
-                if (ship.isDestroyed==='false'){                  
+            prevState.layout.map(ship => {               
+                if (ship.isDestroyed==='false'){  
+                    // console.log(ship.ship+ " isDestroyed "+ ship.isDestroyed)
                     for (let i = 0; i < ship.positions.length; i++){                       
                         if ((ship.positions[i][0]===x)&&(ship.positions[i][1]===y)&&(ship.positions[i][2] === 0)){                           
                             ship.positions[i][2] = '1';
-                            console.log("ship.positions["+i+"][2] ="+ship.positions[i][2])
+                            console.log("ship "+ship.ship +" .positions["+i+"][2] ="+ship.positions[i][2])
                             newColors[idx] = 'red';
                             resultSheep = ship;                          
                             ship.alive--;
-                            console.log("alive:"+ ship.alive)
-                            if (ship.alive === 0){
+                            console.log(ship.ship+" alive:"+ ship.alive)
+                            if ((ship.alive === 0)&&(ship.isDestroyed === 'false')){
                                 toDestroy = true;
                                 resultSheep.isDestroyed = true;
+                                console.log(resultSheep.ship+" isDestroyed: "+ resultSheep.isDestroyed)
                             }                         
                         }     
                     }
                 }
             });
             if ((resultSheep)&&(toDestroy)) {
-                console.log("toDestroy "+resultSheep.ship)
+                console.log("painting black ...... "+resultSheep.ship)
+                newCountShip--;
+                console.log("=================countSheep===== "+newCountShip);
                 resultSheep.positions.map(position => {
                     const num = position[0]*10+position[1];
-                    newColors[num] = 'black';
+                    newColors[num] = 'black';                
+                    
                 })                
             } else if (resultSheep){
                   newLayout[resultSheep.index] = resultSheep;
             }
             else {
-                newColors[idx] = prevState.cellColors[idx]==='lightblue' ? 'grey': (prevState.cellColors[idx]==='black' ? 'black' : 'grey')
+                newColors[idx] = prevState.cellColors[idx]==='lightblue' ? 'grey': (prevState.cellColors[idx]==='black' ? 'black' : (prevState.cellColors[idx]==='red' ? 'red' : 'grey'))
             }
-
             return {
                 cellColors: newColors,
-                layout: newLayout
+                layout: newLayout,
+                countShip: newCountShip
             }
-        });
+        });        
     }
 
     renderCells = () => {
@@ -98,20 +98,12 @@ class Counter extends Component {
         return arrayOfCells;
     }
 
-    renderCellsXY = () => {
-        
-    }
-
     render () {
        const arrayOfCells = this.renderCells();
         return (
             <div className="counter">
                 {arrayOfCells}
-                {/* <CounterOutput value={this.props.ctr} />
-                <CounterControl label="Increment" clicked={this.props.onIncrementCounter} />
-                <CounterControl label="Decrement" clicked={this.props.onDecrementCounter}  />
-                <CounterControl label="Add 5" clicked={this.props.onAddCounter}  />
-                <CounterControl label="Subtract 5" clicked={this.props.onSubtractCounter}  /> */}
+            
             </div>
         );
     }
@@ -135,4 +127,14 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);   
+
+
+
+
+
+/*{ <CounterOutput value={this.props.ctr} />
+                <CounterControl label="Increment" clicked={this.props.onIncrementCounter} />
+                <CounterControl label="Decrement" clicked={this.props.onDecrementCounter}  />
+                <CounterControl label="Add 5" clicked={this.props.onAddCounter}  />
+                <CounterControl label="Subtract 5" clicked={this.props.onSubtractCounter}  /> }*/
