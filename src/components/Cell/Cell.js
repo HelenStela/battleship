@@ -10,7 +10,7 @@ class Cell extends React.Component {
     }
 
     render() {
-        return (<div className="cell" onClick={this.handleClick} style={{ backgroundColor: this.props.color }}></div>)
+        return (<div className="cell" onClick={() => this.props.handleClick(this.props.idx)} style={{ backgroundColor: this.props.color }}></div>)
     }
 }
 

@@ -7,20 +7,20 @@ const data = [{
       "destroyer": { "size": 2, "count": 1 },
     },
     "layout": [
-      { alive: 5, index: 0, "isDestroyed": "false","ship": "carrier", "positions": [[2,9,0], [3,9,0], [4,9,0], [5,9,0], [6,9,0]] },
-      { alive: 4, index: 1, "isDestroyed": "false","ship": "battleship", "positions": [[5,2,0], [5,3,0], [5,4,0], [5,5,0]] },
-      { alive: 3, index: 2, "isDestroyed": "false","ship": "cruiser", "positions": [[8,1,0], [8,2,0], [8,3,0]] },
-      { alive: 3, index: 3, "isDestroyed": "false","ship": "submarine", "positions": [[3,0,0], [3,1,0], [3,2,0]] },
-      { alive: 2, index: 4, "isDestroyed": "false","ship": "destroyer", "positions": [[0,0,0], [1,0,0]] }
+      { alive: 5, index: 0, "isDestroyed": false,"ship": "carrier", "positions": [[2,9,0], [3,9,0], [4,9,0], [5,9,0], [6,9,0]] },
+      { alive: 4, index: 1, "isDestroyed": false,"ship": "battleship", "positions": [[5,2,0], [5,3,0], [5,4,0], [5,5,0]] },
+      { alive: 3, index: 2, "isDestroyed": false,"ship": "cruiser", "positions": [[8,1,0], [8,2,0], [8,3,0]] },
+      { alive: 3, index: 3, "isDestroyed": false,"ship": "submarine", "positions": [[3,0,0], [3,1,0], [3,2,0]] },
+      { alive: 2, index: 4, "isDestroyed": false,"ship": "destroyer", "positions": [[0,0,0], [1,0,0]] }
     ]
 }];
 
 const dataShip = [
-    { alive: 5, index: 0, "isDestroyed": "false","ship": "carrier", "positions": [[2,9,0], [3,9,0], [4,9,0], [5,9,0], [6,9,0]] },
-    { alive: 4, index: 1, "isDestroyed": "false","ship": "battleship", "positions": [[5,2,0], [5,3,0], [5,4,0], [5,5,0]] },
-    { alive: 3, index: 2, "isDestroyed": "false","ship": "cruiser", "positions": [[8,1,0], [8,2,0], [8,3,0]] },
-    { alive: 3, index: 3, "isDestroyed": "false","ship": "submarine", "positions": [[3,0,0], [3,1,0], [3,2,0]] },
-    { alive: 2, index: 4, "isDestroyed": "false","ship": "destroyer", "positions": [[0,0,0], [1,0,0]] }
+    { alive: 5, "isDestroyed": false,"ship": "carrier", "positions": [[2,9,0], [3,9,0], [4,9,0], [5,9,0], [6,9,0]] },
+    { alive: 4, "isDestroyed": false,"ship": "battleship", "positions": [[5,2,0], [5,3,0], [5,4,0], [5,5,0]] },
+    { alive: 3, "isDestroyed": false,"ship": "cruiser", "positions": [[8,1,0], [8,2,0], [8,3,0]] },
+    { alive: 3, "isDestroyed": false,"ship": "submarine", "positions": [[3,0,0], [3,1,0], [3,2,0]] },
+    { alive: 2, "isDestroyed": false,"ship": "destroyer", "positions": [[0,0,0], [1,0,0]] }
   ]
 
 // data[0].layout[0].positions[][]
